@@ -1,5 +1,14 @@
 ## Create a solution 
 
+
+## Init git
+```sh
+git config --global core.autocrlf 
+git clone git@github.com:Jallalbrahimi/dotnetwebapp.git
+git remote set-url origin git@github.com:Jallalbrahimi/dotnetwebapp.git
+```
+
+
 ```sh
 mkdir src
 cd src
@@ -26,6 +35,7 @@ dotnet add WebApp.Infrastructure reference WebApp.Application
 
 ## Add projects to the solution
 ```sh
+dotnet add WebApp.Application package Microsoft.Extensions.DependencyInjection
 dotnet add WebApp.Application package FluentValidation
 dotnet add WebApp.Api package Microsoft.EntityFrameworkCore.Design
 dotnet add WebApp.Api package Swashbuckle.AspNetCore
@@ -45,4 +55,7 @@ dotnet add WebApp.Api package Microsoft.EntityFrameworkCore.Design
 ```sh
 dotnet tool update --global dotnet-ef
 ```
+
+## Links
+https://medium.com/@paveluzunov/the-easiest-way-to-replace-mediatr-cb6a0fa07ded
 
