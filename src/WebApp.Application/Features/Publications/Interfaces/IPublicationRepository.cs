@@ -6,5 +6,10 @@ public interface IPublicationRepository
 {
     Task<Guid> CreatePublicationAsync(Publication publication, CancellationToken cancellationToken);
     
-    Task<Publication> GetPublicationByIdAsync(Guid id, CancellationToken cancellationToken);
+    Task<IList<Publication>> GetPublicationsAsync(CancellationToken cancellationToken);
+    
+    Task<Publication?> GetPublicationByIdAsync(Guid id, CancellationToken cancellationToken);
+
+    Task DeletePublicationAsync(Guid id, CancellationToken cancellationToken);
+    Task UpdatePublicationAsync(Publication publication, CancellationToken cancellationToken);
 }

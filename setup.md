@@ -33,9 +33,10 @@ dotnet add WebApp.Infrastructure reference WebApp.Domain
 dotnet add WebApp.Infrastructure reference WebApp.Application 
 ```
 
-## Add projects to the solution
+## Add assemblies to the projects
 ```sh
 dotnet add WebApp.Application package Microsoft.Extensions.DependencyInjection
+dotnet add WebApp.Application package Microsoft.Extensions.Logging.Abstractions
 dotnet add WebApp.Application package FluentValidation
 dotnet add WebApp.Api package Microsoft.EntityFrameworkCore.Design
 dotnet add WebApp.Api package Swashbuckle.AspNetCore
@@ -54,6 +55,12 @@ dotnet add WebApp.Api package Microsoft.EntityFrameworkCore.Design
 ## Init EF Core
 ```sh
 dotnet tool update --global dotnet-ef
+
+# To create the first migration (from the solution directory)
+dotnet ef migrations add InitialCreate --verbose --project WebApp.Infrastructure --context WebApp.Infrastructure.Persistence.ApplicationDbContext --startup-project WebApp.Api
+
+# To update the migrations
+dotnet ef database update --verbose --project WebApp.Infrastructure --context WebApp.Infrastructure.Persistence.ApplicationDbContext --startup-project WebApp.Api
 ```
 
 ## Links

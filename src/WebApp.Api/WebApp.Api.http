@@ -1,0 +1,33 @@
+@hostAddress = http://localhost:5240
+
+GET {{hostAddress}}/api/publications
+Accept: application/json
+
+###
+GET {{hostAddress}}/api/publications/bc866e9d-c01b-478d-9370-376ffc2b5a5a
+Accept: application/json
+
+###
+POST {{hostAddress}}/api/publications
+Content-Type: application/json
+
+{
+    "title": "Publication 1",
+    "body": "This is my first publication",
+    "PublishedAt": "2025-10-10T11:20:02Z"
+}
+
+###
+PUT {{hostAddress}}/api/publications
+Content-Type: application/json
+
+{
+  "id": "b64ebca4-2871-448c-8ee7-1f5cf354f7e0",
+  "title": "Publication 2",
+  "body": "This is my second (updated) publication",
+  "PublishedAt": "2025-10-10T11:24:02Z"
+}
+
+###
+DELETE {{hostAddress}}/api/publications/bc866e9d-c01b-478d-9370-376ffc2b5a5a
+Content-Type: application/json
