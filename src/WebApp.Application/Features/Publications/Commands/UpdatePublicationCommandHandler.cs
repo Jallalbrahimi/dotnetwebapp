@@ -11,7 +11,7 @@ public class UpdatePublicationCommandHandler(IPublicationRepository publicationR
     public async Task<Unit> HandleAsync(UpdatePublicationCommand command, CancellationToken cancellationToken)
     {
         // Update domain object
-        //TODO: mock the Now
+        // TODO: validate input
         Publication publication = new () { Id = command.Id, Title = command.Title, Body = command.Body, PublishedAt = command.PublishedAt};
 
         // Update publication

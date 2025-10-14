@@ -6,10 +6,10 @@ public abstract class BaseEntity
     public Guid Id { get; init; } = Guid.NewGuid();
 
     // Timestamps
-    public DateTime CreatedAt { get; init; } = DateTime.UtcNow;
+    public DateTimeOffset CreatedAt { get; set; }
 
     // Soft delete support
     public bool IsDeleted { get; set; }
-    public DateTime? DeletedAt { get; set; }
+    public DateTimeOffset DeletedAt { get; set; }
 
 }

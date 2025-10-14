@@ -11,7 +11,7 @@ public class CreatePublicationCommandHandler(IPublicationRepository publicationR
     public async Task<Guid> HandleAsync(CreatePublicationCommand command, CancellationToken cancellationToken)
     {
         // Create domain object
-        //TODO: mock the Now
+        // TODO: Validate input
         Publication publication = new () { Title = command.Title, Body = command.Body, PublishedAt = command.PublishedAt};
 
         // Create and return DTO from saved domain object

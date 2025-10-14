@@ -35,8 +35,8 @@ public static class PublicationsEndpoints
         // PUT: /api/publications/
         app.MapPut("/api/publications/", async (UpdatePublicationCommand command, [FromServices] IMediator mediator, CancellationToken cancellationToken) =>
         {
-            var publication = await mediator.SendCommandAsync<UpdatePublicationCommand, Unit>(new UpdatePublicationCommand(command.Id, command.Title, command.Body, command.PublishedAt), cancellationToken);
-            return Results.Ok(publication);
+            await mediator.SendCommandAsync<UpdatePublicationCommand, Unit>(new UpdatePublicationCommand(command.Id, command.Title, command.Body, command.PublishedAt), cancellationToken);
+            return Results.NoContent();
         });
         
         // DELETE: /api/publications/id

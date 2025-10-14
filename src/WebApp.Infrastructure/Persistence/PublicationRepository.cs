@@ -4,10 +4,11 @@ using WebApp.Domain.Entities;
 
 namespace WebApp.Infrastructure.Persistence;
 
-public class PublicationRepository(ApplicationDbContext dbContext) : IPublicationRepository
+public class PublicationRepository(ApplicationDbContext dbContext, TimeProvider timeProvider) : IPublicationRepository
 {
     public async Task<Guid> CreatePublicationAsync(Publication publication, CancellationToken cancellationToken)
     {
+        publication.CreatedAt = timeProvider.GetUtcNow();
         dbContext.Publications.Add(publication);
         await dbContext.SaveChangesAsync(cancellationToken);
         return publication.Id;
@@ -28,7 +29,7 @@ public class PublicationRepository(ApplicationDbContext dbContext) : IPublicatio
         var publication = await dbContext.Publications.FindAsync(id, cancellationToken);
         if (publication == null) return;
         publication.IsDeleted = true;
-        publication.DeletedAt = DateTime.UtcNow; //TODO: mock UtcNow
+        publication.DeletedAt = timeProvider.GetUtcNow();
         await dbContext.SaveChangesAsync(cancellationToken);
     }
 
