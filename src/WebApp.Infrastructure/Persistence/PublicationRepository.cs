@@ -8,7 +8,7 @@ public class PublicationRepository(ApplicationDbContext dbContext, TimeProvider 
 {
     public async Task<Guid> CreatePublicationAsync(Publication publication, CancellationToken cancellationToken)
     {
-        publication.CreatedAt = timeProvider.GetUtcNow();
+        publication.CreatedOn = timeProvider.GetUtcNow();
         dbContext.Publications.Add(publication);
         await dbContext.SaveChangesAsync(cancellationToken);
         return publication.Id;
@@ -29,7 +29,7 @@ public class PublicationRepository(ApplicationDbContext dbContext, TimeProvider 
         var publication = await dbContext.Publications.FindAsync(id, cancellationToken);
         if (publication == null) return;
         publication.IsDeleted = true;
-        publication.DeletedAt = timeProvider.GetUtcNow();
+        publication.DeletedOn = timeProvider.GetUtcNow();
         await dbContext.SaveChangesAsync(cancellationToken);
     }
 

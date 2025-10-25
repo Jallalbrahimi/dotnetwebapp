@@ -31,3 +31,37 @@ Content-Type: application/json
 ###
 DELETE {{hostAddress}}/api/publications/bc866e9d-c01b-478d-9370-376ffc2b5a5a
 Content-Type: application/json
+
+###
+POST {{hostAddress}}/auth/register
+Content-Type: application/json
+
+{
+    "name": "Batman",
+    "firstname": "Bruce",
+    "lastname": "Wayne",
+    "email": "bruce.waye@waynecorp.com",
+    "password": "Password123!"
+}
+
+###
+POST {{hostAddress}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "bruce.waye@waynecorp.com",
+  "password": "Password123!"
+}
+
+###
+POST {{hostAddress}}/auth/logout
+Content-Type: application/json
+
+{
+  "email": "bruce.waye@waynecorp.com",
+  "password": "Password123!"
+}
+
+###
+GET {{hostAddress}}/protected
+Accept: application/json

@@ -1,5 +1,3 @@
-using WebApp.Domain.Entities;
-
 namespace WebApp.Domain.Entities;
 
 public class Publication : BaseEntity

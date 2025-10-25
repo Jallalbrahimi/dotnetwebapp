@@ -5,11 +5,12 @@ public abstract class BaseEntity
     // EF Core primary key
     public Guid Id { get; init; } = Guid.NewGuid();
 
-    // Timestamps
-    public DateTimeOffset CreatedAt { get; set; }
-
+   
     // Soft delete support
     public bool IsDeleted { get; set; }
-    public DateTimeOffset DeletedAt { get; set; }
+    
+    // Audit
+    public DateTimeOffset CreatedOn { get; set; }
+    public DateTimeOffset DeletedOn { get; set; }
 
 }

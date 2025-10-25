@@ -40,6 +40,8 @@ dotnet add WebApp.Application package Microsoft.Extensions.Logging.Abstractions
 dotnet add WebApp.Application package FluentValidation
 dotnet add WebApp.Api package Microsoft.EntityFrameworkCore.Design
 dotnet add WebApp.Api package Swashbuckle.AspNetCore
+dotnet add WebApp.Domain package Microsoft.Extensions.Identity.Core
+dotnet add WebApp.Domain package Microsoft.Extensions.Identity.Stores
 ```
 
 ## EF Core and SQL Server Provider
@@ -47,9 +49,12 @@ dotnet add WebApp.Api package Swashbuckle.AspNetCore
 dotnet add WebApp.Infrastructure package Microsoft.EntityFrameworkCore
 dotnet add WebApp.Infrastructure package Microsoft.EntityFrameworkCore.Sqlite
 dotnet add WebApp.Infrastructure package Microsoft.EntityFrameworkCore.Design
+dotnet add WebApp.Infrastructure package Microsoft.AspNetCore.Identity
+dotnet add WebApp.Infrastructure package Microsoft.AspNetCore.Identity.EntityFrameworkCore
 dotnet add WebApp.Infrastructure package Microsoft.Extensions.Configuration.FileExtensions
 dotnet add WebApp.Infrastructure package Microsoft.Extensions.Configuration.Json
 dotnet add WebApp.Api package Microsoft.EntityFrameworkCore.Design
+
 ```
 
 ## Init EF Core
