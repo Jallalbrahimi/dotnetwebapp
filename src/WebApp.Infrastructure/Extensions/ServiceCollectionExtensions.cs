@@ -1,14 +1,9 @@
 using System.Reflection;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using WebApp.Application.Common.Logging;
-using WebApp.Application.Features.Authentication.Interfaces;
 using WebApp.Application.Features.Publications.Interfaces;
 using WebApp.Application.Mediator;
-using WebApp.Domain.Entities;
-using WebApp.Infrastructure.Identity;
 using WebApp.Infrastructure.Persistence;
 
 namespace WebApp.Infrastructure.Extensions;
@@ -29,9 +24,6 @@ public static class ServiceCollectionExtensions
 #if DEBUG
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
 #endif
-       
-                
-        services.AddScoped<IAuthenticationService, AuthenticationService>();
         
         // Register the repositories
         services.AddScoped<IPublicationRepository, PublicationRepository>();
@@ -39,8 +31,6 @@ public static class ServiceCollectionExtensions
         
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlite(connectionString));
-
-
         
         return services;
     }

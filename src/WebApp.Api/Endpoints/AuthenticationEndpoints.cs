@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using WebApp.Application.Features.Authentication.Commands;
 using WebApp.Application.Mediator;
 using WebApp.Domain.Entities;
+using WebApp.Identity.Entities;
 
 namespace WebApp.Api.Endpoints;
 
@@ -16,12 +17,14 @@ public static class AuthenticationEndpoints
         
 
         
-        app.MapPost("/auth/register", async (RegisterCommand command, IMediator mediator) =>
+        app.MapPost("/auth/register", async (RegisterCommand command, UserManager<ApplicationUser> userManager) =>
         {
             try
             {
-                var result = await mediator.SendCommandAsync<RegisterCommand, bool>(command);
-                return Results.Ok(result);
+                var user = new ApplicationUser() { Id = Guid.NewGuid(), UserName = command.Email, Email = command.Email, FirstName = command.FirstName, LastName = command.LastName };
+                var result = await userManager.CreateAsync(user, command.Password);
+                
+                return result.Succeeded ? Results.Ok() : Results.InternalServerError(result.Errors);
             }
             catch (Exception e)
             {
@@ -30,23 +33,20 @@ public static class AuthenticationEndpoints
         });
         
         
-        app.MapPost("/auth/login", async (LoginCommand command, SignInManager<ApplicationUser> signInManager, IMediator mediator) =>
+        app.MapPost("/auth/login", async (LoginCommand command, SignInManager<ApplicationUser> signInManager) =>
         {
             try
             {
                 if (string.IsNullOrWhiteSpace(command.Email) || string.IsNullOrWhiteSpace(command.Password))
                     return Results.BadRequest("Email and password required.");
                 
-                var user = await mediator.SendCommandAsync<LoginCommand, ApplicationUser?>(command);
+                var result = await signInManager.PasswordSignInAsync(
+                    command.Email,
+                    command.Password,
+                    isPersistent: command.RememberMe,
+                    lockoutOnFailure: false);
 
-                if (user == null)
-                {
-                    return Results.Unauthorized();
-                }
-                
-                await signInManager.SignInAsync(user, isPersistent: true);
-
-                return Results.Ok();
+                return result.Succeeded ? Results.Ok() : Results.Unauthorized();
             }
             catch (Exception e)
             {

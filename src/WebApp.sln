@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp.Domain", "WebApp.Dom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp.Infrastructure", "WebApp.Infrastructure\WebApp.Infrastructure.csproj", "{CE946C97-25C2-451C-A149-913AFCFB14A0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp.Identity", "WebApp.Identity\WebApp.Identity.csproj", "{69A4839B-DE7F-4051-BEC2-D2FEB0146EED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{CE946C97-25C2-451C-A149-913AFCFB14A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE946C97-25C2-451C-A149-913AFCFB14A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE946C97-25C2-451C-A149-913AFCFB14A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69A4839B-DE7F-4051-BEC2-D2FEB0146EED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69A4839B-DE7F-4051-BEC2-D2FEB0146EED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69A4839B-DE7F-4051-BEC2-D2FEB0146EED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69A4839B-DE7F-4051-BEC2-D2FEB0146EED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,5 +1,5 @@
 using WebApp.Application.Mediator;
-using WebApp.Domain.Entities;
+using WebApp.Identity.Entities;
 
 namespace WebApp.Application.Features.Authentication.Commands;
 

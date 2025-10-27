@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace WebApp.Domain.Entities;
+namespace WebApp.Identity.Entities;
 
 /// <summary>
 /// Inheriting from IdentityUser forces the Domain project to rely on Microsoft.AspNetCore.Identity namespace.
@@ -11,7 +11,7 @@ namespace WebApp.Domain.Entities;
 public class ApplicationUser : IdentityUser<Guid>
 {
     // Extended properties
-    public string FirstName { get; set; } = null!;
+    public string? FirstName { get; set; } = null!;
     public string? LastName { get; set; }
     public DateTimeOffset DateOfBirth { get; set; }
     public DateTimeOffset LastLogin { get; set; }

@@ -21,13 +21,14 @@ dotnet new web -n WebApp.Api
 dotnet new classlib -n WebApp.Domain
 dotnet new classlib -n WebApp.Application
 dotnet new classlib -n WebApp.Infrastructure
+dotnet new classlib -n WebApp.Identity
 
-dotnet sln WebApp.sln add WebApp.Api WebApp.Application WebApp.Domain WebApp.Infrastructure
+dotnet sln WebApp.sln add WebApp.Api WebApp.Application WebApp.Domain WebApp.Infrastructure WebApp.Identity
 ```
 
 ## Add references between projects
 ```sh
-dotnet add WebApp.Api reference WebApp.Domain WebApp.Application WebApp.Infrastructure
+dotnet add WebApp.Api reference WebApp.Domain WebApp.Application WebApp.Identity WebApp.Infrastructure
 dotnet add WebApp.Application reference WebApp.Domain
 dotnet add WebApp.Infrastructure reference WebApp.Domain
 dotnet add WebApp.Infrastructure reference WebApp.Application 
@@ -40,8 +41,8 @@ dotnet add WebApp.Application package Microsoft.Extensions.Logging.Abstractions
 dotnet add WebApp.Application package FluentValidation
 dotnet add WebApp.Api package Microsoft.EntityFrameworkCore.Design
 dotnet add WebApp.Api package Swashbuckle.AspNetCore
-dotnet add WebApp.Domain package Microsoft.Extensions.Identity.Core
-dotnet add WebApp.Domain package Microsoft.Extensions.Identity.Stores
+dotnet add WebApp.Identity package Microsoft.Extensions.Identity.Core
+dotnet add WebApp.Identity package Microsoft.Extensions.Identity.Stores
 ```
 
 ## EF Core and SQL Server Provider
@@ -49,10 +50,18 @@ dotnet add WebApp.Domain package Microsoft.Extensions.Identity.Stores
 dotnet add WebApp.Infrastructure package Microsoft.EntityFrameworkCore
 dotnet add WebApp.Infrastructure package Microsoft.EntityFrameworkCore.Sqlite
 dotnet add WebApp.Infrastructure package Microsoft.EntityFrameworkCore.Design
-dotnet add WebApp.Infrastructure package Microsoft.AspNetCore.Identity
-dotnet add WebApp.Infrastructure package Microsoft.AspNetCore.Identity.EntityFrameworkCore
 dotnet add WebApp.Infrastructure package Microsoft.Extensions.Configuration.FileExtensions
 dotnet add WebApp.Infrastructure package Microsoft.Extensions.Configuration.Json
+
+dotnet add WebApp.Identity package Microsoft.EntityFrameworkCore
+dotnet add WebApp.Identity package Microsoft.EntityFrameworkCore.Sqlite
+dotnet add WebApp.Identity package Microsoft.EntityFrameworkCore.Design
+dotnet add WebApp.Identity package Microsoft.Extensions.Configuration.FileExtensions
+dotnet add WebApp.Identity package Microsoft.Extensions.Configuration.Json
+dotnet add WebApp.Identity package Microsoft.AspNetCore.Identity
+dotnet add WebApp.Identity package Microsoft.AspNetCore.Identity.EntityFrameworkCore
+dotnet add WebApp.Identity package Microsoft.AspNetCore.Identity.UI
+
 dotnet add WebApp.Api package Microsoft.EntityFrameworkCore.Design
 
 ```
@@ -62,7 +71,8 @@ dotnet add WebApp.Api package Microsoft.EntityFrameworkCore.Design
 dotnet tool update --global dotnet-ef
 
 # To create the first migration (from the solution directory)
-dotnet ef migrations add InitialCreate --verbose --project WebApp.Infrastructure --context WebApp.Infrastructure.Persistence.ApplicationDbContext --startup-project WebApp.Api
+dotnet ef migrations add InitialCreate --verbose --project WebApp.Infrastructure --context WebApp.Infrastructure.Persistence.ApplicationDbContext   --startup-project WebApp.Api
+dotnet ef migrations add InitialCreate --verbose --project WebApp.Identity       --context WebApp.Identity.Persistence.ApplicationIdentityDbContext --startup-project WebApp.Api
 
 # To update the migrations
 dotnet ef database update --verbose --project WebApp.Infrastructure --context WebApp.Infrastructure.Persistence.ApplicationDbContext --startup-project WebApp.Api
